@@ -6,21 +6,25 @@ The current focus is on initializing the project and establishing the foundation
 
 ## Recent Changes
 
--   Created the `types/index.ts` file, which defines the core data structures for the game (`GameState`, `Book`, `Upgrade`, `Genre`).
--   Refined the `Upgrade` interface to use a functional approach for applying effects, making the system more extensible.
--   Updated the `GameState` to include tracking for a `trendingGenre`.
--   Adjusted the `Genre` type to start with only 'Romance'.
+-   **Styled the application:** Applied a consistent dark-theme design to all major components (`GameContainer`, `StatsPanel`, `BookDisplay`, `UpgradePanel`) using Tailwind CSS.
+-   **Improved UI/UX:**
+    -   Created a two-column layout for better organization.
+    -   Added visual feedback for disabled buttons in the `UpgradePanel`.
+    -   Implemented a custom progress bar in `BookDisplay`.
+-   **Expanded Gameplay:** Added a variety of new upgrades with escalating costs and effects to enhance player progression.
 
 ## Next Steps
 
-1.  **Set up Game State:** (Completed) Define the initial game state structure in a new file, `/types/index.ts`.
-2.  **Create Core Components:** Develop the initial set of React components for the game interface. This will include:
-    -   A `GameContainer` component to hold the main game logic.
-    -   A `BookDisplay` component to show the current book being written.
-    -   An `UpgradePanel` component to display available upgrades.
-    -   A `StatsPanel` component to show the player's current stats (e.g., money, books per second).
-3.  **Implement Game Loop:** Create the basic game loop to handle passive income generation and other time-based events.
-4.  **Style the Application:** Apply basic styling using Tailwind CSS to create a clean and functional UI.
+1.  **Implement "In-Fashion" Genre Mechanic:**
+    -   Create a system to periodically change the `trendingGenre`.
+    -   Update book value calculations to give a bonus for the trending genre.
+2.  **Rebalance and Refine Upgrades:**
+    -   Adjust upgrade costs and money generation to improve game pacing.
+    -   Hide upgrades that are significantly more expensive than the player's current money.
+    -   Add upgrades that unlock new genres.
+    -   Add upgrades that provide unique, non-linear bonuses.
+3.  **Backend Integration:**
+    -   Set up Supabase to save and load player progress.
 
 ## Active Decisions
 
