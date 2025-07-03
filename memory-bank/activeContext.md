@@ -6,18 +6,26 @@ The current focus is on initializing the project and establishing the foundation
 
 ## Recent Changes
 
--   **Styled the application:** Applied a consistent dark-theme design to all major components (`GameContainer`, `StatsPanel`, `BookDisplay`, `UpgradePanel`) using Tailwind CSS.
+-   **Rebalanced Gameplay Mechanics:**
+    -   Compressed the cost of all upgrades to accelerate progression.
+    -   Reduced the word count for books and randomized it (50-100 words).
+    -   Added a new `wordCountMultiplier` and associated upgrades to decrease book length over time.
 -   **Improved UI/UX:**
+    -   Hid unaffordable upgrades to reduce clutter in the `UpgradePanel`.
+    -   Added a fallback message in the `UpgradePanel` for when no upgrades are visible, preventing layout issues.
     -   Created a two-column layout for better organization.
     -   Added visual feedback for disabled buttons in the `UpgradePanel`.
     -   Implemented a custom progress bar in `BookDisplay`.
--   **Expanded Gameplay:** Added a variety of new upgrades with escalating costs and effects to enhance player progression.
+-   **Updated Project Brief:** Changed the target time for next upgrade from 30-60 seconds to 10-30 seconds.
+-   **Styled the application:** Applied a consistent dark-theme design to all major components (`GameContainer`, `StatsPanel`, `BookDisplay`, `UpgradePanel`) using Tailwind CSS.
 
 ## Next Steps
 
-1.  **Rebalance and Refine Upgrades:**
-    -   Adjust upgrade costs and money generation to improve game pacing.
-    -   Hide upgrades that are significantly more expensive than the player's current money.
+1.  **Backend Integration:**
+    -   Set up Supabase to save and load player progress.
+2.  **Enhance UI/UX:**
+    -   Provide more feedback on upgrade purchases.
+    -   Animate the money counter when it increases.
     -   Add upgrades that provide unique, non-linear bonuses (e.g., manipulating market trends).
 2.  **Backend Integration:**
     -   Set up Supabase to save and load player progress.

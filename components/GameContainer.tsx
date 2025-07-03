@@ -7,136 +7,28 @@ import BookDisplay from './BookDisplay';
 import UpgradePanel from './UpgradePanel';
 
 const availableUpgrades: Upgrade[] = [
-  {
-    id: 'fast-writer-1',
-    name: 'Ergonomic Keyboard',
-    description: 'Increases writing speed by 1 word per click.',
-    cost: 10,
-    apply: (gameState) => ({
-      ...gameState,
-      wordsPerClick: gameState.wordsPerClick + 1,
-    }),
-  },
-  {
-    id: 'fast-writer-2',
-    name: 'Touch Typing Course',
-    description: 'Increases writing speed by 5 words per click.',
-    cost: 100,
-    apply: (gameState) => ({
-      ...gameState,
-      wordsPerClick: gameState.wordsPerClick + 5,
-    }),
-  },
-  {
-    id: 'fast-writer-3',
-    name: 'Mechanical Keyboard',
-    description: 'Increases writing speed by 10 words per click.',
-    cost: 500,
-    apply: (gameState) => ({
-      ...gameState,
-      wordsPerClick: gameState.wordsPerClick + 10,
-    }),
-  },
-  {
-    id: 'hire-blogger',
-    name: 'Hire Blogger',
-    description: 'A local blogger writes 1 word per second for you.',
-    cost: 25,
-    apply: (gameState) => ({
-      ...gameState,
-      wordsPerSecond: gameState.wordsPerSecond + 1,
-    }),
-  },
-  {
-    id: 'hire-ghostwriter',
-    name: 'Hire Ghostwriter',
-    description: 'A professional ghostwriter adds 10 words per second.',
-    cost: 250,
-    apply: (gameState) => ({
-      ...gameState,
-      wordsPerSecond: gameState.wordsPerSecond + 10,
-    }),
-  },
-  {
-    id: 'hire-writing-team',
-    name: 'Hire Writing Team',
-    description: 'A team of writers adds 50 words per second.',
-    cost: 1500,
-    apply: (gameState) => ({
-      ...gameState,
-      wordsPerSecond: gameState.wordsPerSecond + 50,
-    }),
-  },
-  {
-    id: 'better-covers',
-    name: 'Better Covers',
-    description: 'Increases the value of your books by 10%.',
-    cost: 50,
-    apply: (gameState) => ({
-      ...gameState,
-      bookValueMultiplier: gameState.bookValueMultiplier * 1.1,
-    }),
-  },
-  {
-    id: 'professional-editing',
-    name: 'Professional Editing',
-    description: 'Increases the value of your books by 25%.',
-    cost: 500,
-    apply: (gameState) => ({
-      ...gameState,
-      bookValueMultiplier: gameState.bookValueMultiplier * 1.25,
-    }),
-  },
-  {
-    id: 'marketing-campaign',
-    name: 'Marketing Campaign',
-    description: 'Doubles the value of your books.',
-    cost: 2000,
-    apply: (gameState) => ({
-      ...gameState,
-      bookValueMultiplier: gameState.bookValueMultiplier * 2,
-    }),
-  },
-  {
-    id: 'unlock-fantasy',
-    name: 'Unlock Fantasy',
-    description: 'Allows you to write Fantasy novels.',
-    cost: 200,
-    apply: (gameState) => ({
-      ...gameState,
-      unlockedGenres: [...gameState.unlockedGenres, 'Fantasy'],
-    }),
-  },
-  {
-    id: 'unlock-sci-fi',
-    name: 'Unlock Sci-Fi',
-    description: 'Allows you to write Sci-Fi novels.',
-    cost: 500,
-    apply: (gameState) => ({
-      ...gameState,
-      unlockedGenres: [...gameState.unlockedGenres, 'Sci-Fi'],
-    }),
-  },
-  {
-    id: 'unlock-mystery',
-    name: 'Unlock Mystery',
-    description: 'Allows you to write Mystery novels.',
-    cost: 1000,
-    apply: (gameState) => ({
-      ...gameState,
-      unlockedGenres: [...gameState.unlockedGenres, 'Mystery'],
-    }),
-  },
-  {
-    id: 'unlock-thriller',
-    name: 'Unlock Thriller',
-    description: 'Allows you to write Thriller novels.',
-    cost: 2500,
-    apply: (gameState) => ({
-      ...gameState,
-      unlockedGenres: [...gameState.unlockedGenres, 'Thriller'],
-    }),
-  },
+  // Fast Writer Upgrades
+  { id: 'fast-writer-1', name: 'Ergonomic Keyboard', description: 'Write +1 word per click.', cost: 10, apply: (gs) => ({ ...gs, wordsPerClick: gs.wordsPerClick + 1 }) },
+  { id: 'fast-writer-2', name: 'Touch Typing Course', description: 'Write +2 words per click.', cost: 40, apply: (gs) => ({ ...gs, wordsPerClick: gs.wordsPerClick + 2 }) },
+  { id: 'fast-writer-3', name: 'Mechanical Keyboard', description: 'Write +5 words per click.', cost: 150, apply: (gs) => ({ ...gs, wordsPerClick: gs.wordsPerClick + 5 }) },
+
+  // Passive Writing Upgrades
+  { id: 'hire-blogger', name: 'Hire Blogger', description: 'Writes +1 word per second.', cost: 20, apply: (gs) => ({ ...gs, wordsPerSecond: gs.wordsPerSecond + 1 }) },
+  { id: 'hire-ghostwriter', name: 'Hire Ghostwriter', description: 'Writes +5 words per second.', cost: 120, apply: (gs) => ({ ...gs, wordsPerSecond: gs.wordsPerSecond + 5 }) },
+  { id: 'hire-writing-team', name: 'Hire Writing Team', description: 'Writes +20 words per second.', cost: 500, apply: (gs) => ({ ...gs, wordsPerSecond: gs.wordsPerSecond + 20 }) },
+
+  // Book Value Upgrades
+  { id: 'better-covers', name: 'Better Covers', description: 'Book value +10%.', cost: 30, apply: (gs) => ({ ...gs, bookValueMultiplier: gs.bookValueMultiplier * 1.1 }) },
+  { id: 'professional-editing', name: 'Professional Editing', description: 'Book value +20%.', cost: 150, apply: (gs) => ({ ...gs, bookValueMultiplier: gs.bookValueMultiplier * 1.2 }) },
+  { id: 'marketing-campaign', name: 'Marketing Campaign', description: 'Book value +50%.', cost: 600, apply: (gs) => ({ ...gs, bookValueMultiplier: gs.bookValueMultiplier * 1.5 }) },
+
+  // Genre Unlocks
+  { id: 'unlock-fantasy', name: 'Unlock Fantasy', description: 'Allows you to write Fantasy novels.', cost: 80, apply: (gs) => ({ ...gs, unlockedGenres: [...gs.unlockedGenres, 'Fantasy'] }) },
+  { id: 'unlock-sci-fi', name: 'Unlock Sci-Fi', description: 'Allows you to write Sci-Fi novels.', cost: 250, apply: (gs) => ({ ...gs, unlockedGenres: [...gs.unlockedGenres, 'Sci-Fi'] }) },
+  
+  // NEW: Word Count Reduction Upgrades
+  { id: 'shorter-books-1', name: 'Concise Writing', description: 'Books require 10% fewer words.', cost: 200, apply: (gs) => ({ ...gs, wordCountMultiplier: gs.wordCountMultiplier * 0.9 }) },
+  { id: 'shorter-books-2', name: 'Abridged Editions', description: 'Books require 15% fewer words.', cost: 750, apply: (gs) => ({ ...gs, wordCountMultiplier: gs.wordCountMultiplier * 0.85 }) },
 ];
 
 const initialState: GameState = {
@@ -147,6 +39,7 @@ const initialState: GameState = {
   wordsPerClick: 1,
   wordsPerSecond: 0,
   bookValueMultiplier: 1,
+  wordCountMultiplier: 1,
   unlockedGenres: ['Romance'],
   trendingGenre: 'Romance',
   trendTimer: 20,
@@ -258,10 +151,11 @@ export default function GameContainer() {
   };
 
   const createNewBook = (genre: Genre) => {
+    const baseWordCount = Math.floor(Math.random() * (100 - 50 + 1)) + 50; // Random base between 50 and 100
     const newBook: Book = {
       id: new Date().toISOString(),
       genre: genre,
-      wordCount: 100,
+      wordCount: Math.floor(baseWordCount * gameState.wordCountMultiplier), // Apply multiplier
       wordsWritten: 0,
       value: 10,
     };
@@ -294,7 +188,8 @@ export default function GameContainer() {
           <UpgradePanel
             upgrades={availableUpgrades.filter(
               (u) =>
-                !gameState.upgrades.some((purchased) => purchased.id === u.id)
+                !gameState.upgrades.some((purchased) => purchased.id === u.id) &&
+                u.cost <= gameState.money * 10 
             )}
             onPurchase={handlePurchaseUpgrade}
             money={gameState.money}

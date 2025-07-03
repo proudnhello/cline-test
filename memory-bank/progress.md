@@ -9,21 +9,24 @@
 -   The core gameplay loop is functional, including manual writing, passive writing, and purchasing upgrades.
 -   **The application has been styled with a dark theme using Tailwind CSS.**
 -   **A variety of new upgrades have been added to the game.**
+-   **Gameplay has been significantly rebalanced:**
+    -   Upgrade costs have been compressed.
+    -   Book word counts are now randomized and can be reduced with new upgrades.
+    -   Unaffordable upgrades are now hidden from view.
+-   **UI has been improved:**
+    -   The `UpgradePanel` now handles cases where no upgrades are visible.
 
 ## What's Left to Build
 
--   **Gameplay:**
-    -   Rebalancing of upgrade costs and money generation.
-    -   Hiding of expensive, currently-unaffordable upgrades.
-    -   Upgrades to manipulate market trends.
 -   **Backend Integration:**
     -   Saving and loading player progress with Supabase.
--   **UI/UX:**
-    -   General polish and visual feedback.
+-   **Gameplay & UI/UX:**
+    -   Upgrades to manipulate market trends.
+    -   General polish and visual feedback (e.g., animations, purchase feedback).
 
 ## Current Status
 
-The basic gameplay and UI are complete. The next focus is on refining the gameplay mechanics and adding backend integration.
+The core gameplay loop and UI are in a good state. The next major focus is backend integration to allow for persistent player progress.
 
 ## Known Issues
 

@@ -24,6 +24,7 @@ export interface GameState {
   wordsPerClick: number;
   wordsPerSecond: number;
   bookValueMultiplier: number;
+  wordCountMultiplier: number;
   unlockedGenres: Genre[];
   trendingGenre: Genre;
   trendTimer: number;
