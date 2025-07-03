@@ -6,32 +6,23 @@ The current focus is on initializing the project and establishing the foundation
 
 ## Recent Changes
 
--   **Rebalanced Gameplay Mechanics:**
-    -   Compressed the cost of all upgrades to accelerate progression.
-    -   Reduced the word count for books and randomized it (50-100 words).
-    -   Added a new `wordCountMultiplier` and associated upgrades to decrease book length over time.
--   **Improved UI/UX:**
-    -   Hid unaffordable upgrades to reduce clutter in the `UpgradePanel`.
-    -   Added a fallback message in the `UpgradePanel` for when no upgrades are visible, preventing layout issues.
-    -   Created a two-column layout for better organization.
-    -   Added visual feedback for disabled buttons in the `UpgradePanel`.
-    -   Implemented a custom progress bar in `BookDisplay`.
--   **Updated Project Brief:** Changed the target time for next upgrade from 30-60 seconds to 10-30 seconds.
--   **Styled the application:** Applied a consistent dark-theme design to all major components (`GameContainer`, `StatsPanel`, `BookDisplay`, `UpgradePanel`) using Tailwind CSS.
+-   **Backend Integration:**
+    -   Installed and configured the Supabase client.
+    -   Created a database migration to add a `profiles` table for storing game state.
+    -   Implemented `saveGameState` and `loadGameState` functions.
+    -   Integrated save/load logic into the `GameContainer` component. Game now loads state on startup and saves periodically and on upgrades.
 
 ## Next Steps
 
-1.  **Backend Integration:**
-    -   Set up Supabase to save and load player progress.
+1.  **Test Supabase Integration:**
+    -   Verify that the game state is being saved to and loaded from Supabase correctly.
 2.  **Enhance UI/UX:**
     -   Provide more feedback on upgrade purchases.
     -   Animate the money counter when it increases.
     -   Add upgrades that provide unique, non-linear bonuses (e.g., manipulating market trends).
-2.  **Backend Integration:**
-    -   Set up Supabase to save and load player progress.
-3.  **Enhance UI/UX:**
-    -   Provide more feedback on upgrade purchases.
-    -   Animate the money counter when it increases.
+3.  **Authentication:**
+    -   Implement a proper login/signup flow so users can create accounts.
+    -   Add a logout button.
 
 ## Active Decisions
 

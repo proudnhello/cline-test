@@ -4,7 +4,7 @@
 
 -   **Framework:** Next.js 14+ with App Router
 -   **Styling:** Tailwind CSS
--   **Backend:** Supabase
+-   **Backend:** Supabase (`@supabase/supabase-js`)
 -   **Deployment:** Vercel
 -   **Version Control:** GitHub
 
@@ -29,3 +29,4 @@ The project follows a standard Next.js structure:
 ## Security Considerations
 
 -   Sensitive files such as `.env` files, files containing secrets, API keys, or other credentials must not be read or modified.
+-   Supabase credentials and other secrets are stored in a `.env.local` file, which is not committed to version control. These are loaded into the application as environment variables.

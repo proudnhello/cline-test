@@ -12,8 +12,9 @@ The application will be a single-page application (SPA) built with Next.js and R
 
 ### Backend
 
--   **Data Persistence:** Player progress will be saved to a Supabase database. This will allow players to close the game and resume their progress later. The application will periodically sync the local game state with the database.
--   **Schema:** The database schema will be simple, likely consisting of a `users` table and a `profiles` table to store game state as a JSON object.
+-   **Data Persistence:** Player progress is saved to a Supabase database. This allows players to close the game and resume their progress later. The application loads the user's state on startup, saves it automatically every 60 seconds, and also saves immediately after an upgrade is purchased.
+-   **Schema:** The database schema consists of a `profiles` table which stores the game state as a JSONB object. It is linked to the `auth.users` table via a `user_id` foreign key. Row-level security is enabled to ensure users can only access their own data.
+-   **Client:** The application uses the `@supabase/supabase-js` library to interact with the backend. A helper file at `lib/supabaseClient.ts` initializes the client, and functions for saving and loading game state are in `lib/gameState.ts`.
 
 ## Key Technical Decisions
 

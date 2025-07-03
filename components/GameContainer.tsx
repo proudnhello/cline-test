@@ -1,7 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { GameState, Book, Upgrade, Genre } from '../types';
+import { supabase } from '../lib/supabaseClient';
+import { createClient } from '@supabase/supabase-js';
+import { saveGameState, loadGameState } from '../lib/gameState';
 import StatsPanel from './StatsPanel';
 import BookDisplay from './BookDisplay';
 import UpgradePanel from './UpgradePanel';
@@ -51,6 +54,31 @@ const genres: Genre[] = ['Romance', 'Fantasy', 'Sci-Fi', 'Mystery', 'Thriller'];
 
 export default function GameContainer() {
   const [gameState, setGameState] = useState<GameState>(initialState);
+  const [userId, setUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setUserId(user.id);
+        const loadedState = await loadGameState(user.id);
+        if (loadedState) {
+          setGameState(loadedState);
+        }
+      }
+    };
+    getUser();
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      const saveInterval = setInterval(() => {
+        saveGameState(userId, gameState);
+      }, 60000); // Save every 60 seconds
+
+      return () => clearInterval(saveInterval);
+    }
+  }, [userId, gameState]);
 
   useEffect(() => {
     const trendInterval = setInterval(() => {
@@ -139,14 +167,16 @@ export default function GameContainer() {
 
   const handlePurchaseUpgrade = (upgrade: Upgrade) => {
     if (gameState.money >= upgrade.cost) {
-      setGameState((prev) => {
-        const newState = upgrade.apply(prev);
-        return {
-          ...newState,
-          money: newState.money - upgrade.cost,
-          upgrades: [...newState.upgrades, upgrade],
-        };
-      });
+      const newState = upgrade.apply(gameState);
+      const finalState = {
+        ...newState,
+        money: newState.money - upgrade.cost,
+        upgrades: [...newState.upgrades, upgrade],
+      };
+      setGameState(finalState);
+      if (userId) {
+        saveGameState(userId, finalState);
+      }
     }
   };
 

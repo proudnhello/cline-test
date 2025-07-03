@@ -16,17 +16,26 @@
 -   **UI has been improved:**
     -   The `UpgradePanel` now handles cases where no upgrades are visible.
 
-## What's Left to Build
+## What Works
 
 -   **Backend Integration:**
-    -   Saving and loading player progress with Supabase.
+    -   The application is connected to a Supabase backend.
+    -   Player progress is saved to and loaded from the database.
+    -   The database schema is defined and managed with migration files.
+
+## What's Left to Build
+
+-   **Testing:**
+    -   Verify the Supabase integration is working as expected.
 -   **Gameplay & UI/UX:**
     -   Upgrades to manipulate market trends.
     -   General polish and visual feedback (e.g., animations, purchase feedback).
+-   **Authentication:**
+    -   A user login/signup system.
 
 ## Current Status
 
-The core gameplay loop and UI are in a good state. The next major focus is backend integration to allow for persistent player progress.
+The backend integration is complete. The next step is to test the save/load functionality to ensure it's working correctly.
 
 ## Known Issues
 
