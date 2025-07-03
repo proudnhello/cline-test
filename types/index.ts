@@ -1,4 +1,4 @@
-export type Genre = 'Romance';
+export type Genre = 'Romance' | 'Fantasy' | 'Sci-Fi' | 'Mystery' | 'Thriller';
 
 export interface Book {
   id: string;
@@ -24,5 +24,9 @@ export interface GameState {
   wordsPerClick: number;
   wordsPerSecond: number;
   bookValueMultiplier: number;
+  unlockedGenres: Genre[];
   trendingGenre: Genre;
+  trendTimer: number;
+  warningTime: number;
+  isTrendEnding: boolean;
 }

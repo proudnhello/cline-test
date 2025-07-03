@@ -15,16 +15,15 @@ The current focus is on initializing the project and establishing the foundation
 
 ## Next Steps
 
-1.  **Implement "In-Fashion" Genre Mechanic:**
-    -   Create a system to periodically change the `trendingGenre`.
-    -   Update book value calculations to give a bonus for the trending genre.
-2.  **Rebalance and Refine Upgrades:**
+1.  **Rebalance and Refine Upgrades:**
     -   Adjust upgrade costs and money generation to improve game pacing.
     -   Hide upgrades that are significantly more expensive than the player's current money.
-    -   Add upgrades that unlock new genres.
-    -   Add upgrades that provide unique, non-linear bonuses.
-3.  **Backend Integration:**
+    -   Add upgrades that provide unique, non-linear bonuses (e.g., manipulating market trends).
+2.  **Backend Integration:**
     -   Set up Supabase to save and load player progress.
+3.  **Enhance UI/UX:**
+    -   Provide more feedback on upgrade purchases.
+    -   Animate the money counter when it increases.
 
 ## Active Decisions
 

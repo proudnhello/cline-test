@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { GameState, Book, Upgrade } from '../types';
+import { GameState, Book, Upgrade, Genre } from '../types';
 import StatsPanel from './StatsPanel';
 import BookDisplay from './BookDisplay';
 import UpgradePanel from './UpgradePanel';
@@ -97,6 +97,46 @@ const availableUpgrades: Upgrade[] = [
       bookValueMultiplier: gameState.bookValueMultiplier * 2,
     }),
   },
+  {
+    id: 'unlock-fantasy',
+    name: 'Unlock Fantasy',
+    description: 'Allows you to write Fantasy novels.',
+    cost: 200,
+    apply: (gameState) => ({
+      ...gameState,
+      unlockedGenres: [...gameState.unlockedGenres, 'Fantasy'],
+    }),
+  },
+  {
+    id: 'unlock-sci-fi',
+    name: 'Unlock Sci-Fi',
+    description: 'Allows you to write Sci-Fi novels.',
+    cost: 500,
+    apply: (gameState) => ({
+      ...gameState,
+      unlockedGenres: [...gameState.unlockedGenres, 'Sci-Fi'],
+    }),
+  },
+  {
+    id: 'unlock-mystery',
+    name: 'Unlock Mystery',
+    description: 'Allows you to write Mystery novels.',
+    cost: 1000,
+    apply: (gameState) => ({
+      ...gameState,
+      unlockedGenres: [...gameState.unlockedGenres, 'Mystery'],
+    }),
+  },
+  {
+    id: 'unlock-thriller',
+    name: 'Unlock Thriller',
+    description: 'Allows you to write Thriller novels.',
+    cost: 2500,
+    apply: (gameState) => ({
+      ...gameState,
+      unlockedGenres: [...gameState.unlockedGenres, 'Thriller'],
+    }),
+  },
 ];
 
 const initialState: GameState = {
@@ -107,11 +147,43 @@ const initialState: GameState = {
   wordsPerClick: 1,
   wordsPerSecond: 0,
   bookValueMultiplier: 1,
+  unlockedGenres: ['Romance'],
   trendingGenre: 'Romance',
+  trendTimer: 20,
+  warningTime: 5,
+  isTrendEnding: false,
 };
+
+const genres: Genre[] = ['Romance', 'Fantasy', 'Sci-Fi', 'Mystery', 'Thriller'];
 
 export default function GameContainer() {
   const [gameState, setGameState] = useState<GameState>(initialState);
+
+  useEffect(() => {
+    const trendInterval = setInterval(() => {
+      setGameState(prev => {
+        const newTimer = prev.trendTimer - 1;
+
+        if (newTimer <= 0) {
+          const newGenre = genres[Math.floor(Math.random() * genres.length)];
+          const newDuration = Math.floor(Math.random() * (30 - 15 + 1)) + 15;
+          const newWarningTime = Math.floor(Math.random() * (5 - 3 + 1)) + 3;
+          return {
+            ...prev,
+            trendingGenre: newGenre,
+            trendTimer: newDuration,
+            warningTime: newWarningTime,
+            isTrendEnding: false,
+          };
+        }
+
+        const isEnding = newTimer <= prev.warningTime;
+        return { ...prev, trendTimer: newTimer, isTrendEnding: isEnding };
+      });
+    }, 1000);
+
+    return () => clearInterval(trendInterval);
+  }, []);
 
   useEffect(() => {
     const gameLoop = setInterval(() => {
@@ -123,9 +195,10 @@ export default function GameContainer() {
 
         if (newWordsWritten >= prev.currentBook.wordCount) {
           const bookValue = prev.currentBook.value * prev.bookValueMultiplier;
+          const finalValue = prev.currentBook.genre === prev.trendingGenre ? bookValue * 3 : bookValue;
           return {
             ...prev,
-            money: prev.money + bookValue,
+            money: prev.money + finalValue,
             currentBook: null,
           };
         }
@@ -153,9 +226,10 @@ export default function GameContainer() {
       if (newWordsWritten >= prev.currentBook!.wordCount) {
         const bookValue =
           prev.currentBook!.value * prev.bookValueMultiplier;
+        const finalValue = prev.currentBook!.genre === prev.trendingGenre ? bookValue * 3 : bookValue;
         return {
           ...prev,
-          money: prev.money + bookValue,
+          money: prev.money + finalValue,
           currentBook: null,
         };
       }
@@ -183,10 +257,10 @@ export default function GameContainer() {
     }
   };
 
-  const createNewBook = () => {
+  const createNewBook = (genre: Genre) => {
     const newBook: Book = {
       id: new Date().toISOString(),
-      genre: 'Romance',
+      genre: genre,
       wordCount: 100,
       wordsWritten: 0,
       value: 10,
@@ -202,12 +276,18 @@ export default function GameContainer() {
           <StatsPanel gameState={gameState} />
           <BookDisplay book={gameState.currentBook} onWrite={handleWrite} />
           {!gameState.currentBook && (
-            <button
-              onClick={createNewBook}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded-lg text-2xl"
-            >
-              Start New Book
-            </button>
+            <div className="space-y-2">
+              <h3 className="text-xl font-bold text-center">Choose a Genre</h3>
+              {gameState.unlockedGenres.map((genre) => (
+                <button
+                  key={genre}
+                  onClick={() => createNewBook(genre)}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg"
+                >
+                  Write {genre}
+                </button>
+              ))}
+            </div>
           )}
         </div>
         <div className="md:col-span-1">

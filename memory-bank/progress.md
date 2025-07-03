@@ -13,12 +13,13 @@
 ## What's Left to Build
 
 -   **Gameplay:**
-    -   "In-fashion" genre mechanic.
     -   Rebalancing of upgrade costs and money generation.
     -   Hiding of expensive, currently-unaffordable upgrades.
-    -   Upgrades to unlock new genres.
+    -   Upgrades to manipulate market trends.
 -   **Backend Integration:**
     -   Saving and loading player progress with Supabase.
+-   **UI/UX:**
+    -   General polish and visual feedback.
 
 ## Current Status
 
